@@ -53,6 +53,17 @@
 				<div class="calendar" id="calendar"></div>
 			</div>
 
+			<!-- Search  -->
+
+			<div class="searchBlock">
+				<div class="card searchBox">
+					<span class="searchPrompt">❯</span>
+					<input id="search" placeholder="Sök bokmärken…   /" autocomplete="off" spellcheck="false" />
+					<span class="searchCount" id="searchCount"></span>
+				</div>
+				<ul class="card searchResults" id="searchResults"></ul>
+			</div>
+
 			<div class="linksBlock" id="linksBlock">
 				<div class="linksBlockLeft" id="linksBlockLeft"></div>
 				<div class="linksBlockRight" id="linksBlockRight"></div>
@@ -65,6 +76,7 @@
 
 		<!-- Config  -->
 		<script src="config.js"></script>
+		<script src="assets/js/colors.js"></script>
 
 		<!-- Scripts  -->
 		<script src="assets/js/layout.js"></script>
@@ -73,11 +85,13 @@
 		<script src="assets/js/greeting.js"></script>
 		<script src="assets/js/weather.js"></script>
 		<script src="assets/js/calendar.js"></script>
+		<script src="syssla/parser.js"></script>
 		<script src="assets/js/syssla.js"></script>
 
 		<!-- Generators  -->
 		<script src="assets/js/buttons.js"></script>
 		<script src="assets/js/lists.js"></script>
+		<script src="assets/js/search.js"></script>
 
 		<!-- Icons -->
 		<script>

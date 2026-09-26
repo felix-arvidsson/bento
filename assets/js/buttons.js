@@ -3,6 +3,8 @@
 // └─┘└─┘ ┴  ┴ └─┘┘└┘└─┘
 // Function to print Button Cards.
 
+let buttonCardIndex = 0;
+
 const generateFirstButtonsContainer = () => {
 	for (const button of CONFIG.firstButtonsContainer) {
 		let item = `
@@ -10,6 +12,7 @@ const generateFirstButtonsContainer = () => {
           href="${button.link}"
           target="${CONFIG.openInNewTab ? '_blank' : ''}"
           class="card button button__${button.id}"
+          style="--card-accent: ${cardColor(buttonCardIndex++)}"
         >
           <i class="buttonIcon" data-lucide="${button.icon}"></i>
         </a>
@@ -28,6 +31,7 @@ const generateSecondButtonsContainer = () => {
           href="${button.link}"
           target="${CONFIG.openInNewTab ? '_blank' : ''}"
           class="card button button__${button.id}"
+          style="--card-accent: ${cardColor(buttonCardIndex++)}"
         >
           <i class="buttonIcon" data-lucide="${button.icon}"></i>
         </a>

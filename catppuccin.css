@@ -130,3 +130,45 @@ body.catppuccin {
 body.catppuccin .card {
   box-shadow: 0 5px 7px rgba(17, 17, 27, 0.25);
 }
+
+/* Each card gets its own palette color (--card-accent, set in JS) */
+
+body.catppuccin .listIcon,
+body.catppuccin .buttonIcon {
+  color: var(--card-accent, var(--accent));
+}
+
+body.catppuccin .list,
+body.catppuccin .button {
+  border-top: 3px solid var(--card-accent, var(--accent));
+}
+
+body.catppuccin .listItem:hover,
+body.catppuccin .button:hover {
+  background-color: var(--card-accent, var(--accent));
+  color: var(--ctp-base);
+}
+
+body.catppuccin .button:hover svg {
+  stroke: var(--ctp-base);
+}
+
+body.catppuccin #greetings {
+  color: var(--ctp-subtext0);
+}
+
+body.catppuccin #themeButton {
+  color: var(--ctp-overlay2);
+}
+
+body.catppuccin #themeButton:hover {
+  color: var(--accent);
+}
+
+body.catppuccin ::selection {
+  background: var(--ctp-surface2);
+}
+
+body.catppuccin {
+  scrollbar-color: var(--ctp-surface1) var(--ctp-base);
+}

@@ -3,6 +3,8 @@
 // ┴─┘┴└─┘ ┴ └─┘
 // Functions for printing both lists
 
+let listCardIndex = 0;
+
 const renderList = (list, container) => {
 	const target = CONFIG.openInNewTab ? '_blank' : '';
 	const links = list.links
@@ -16,7 +18,7 @@ const renderList = (list, container) => {
 		)
 		.join('');
 	const item = `
-        <div class="card list list__${list.id}" id="list_${list.id}">
+        <div class="card list list__${list.id}" id="list_${list.id}" style="--card-accent: ${cardColor(listCardIndex++)}">
           <i class="listIcon" data-lucide="${list.icon}"></i>${links}
         </div>
       `;

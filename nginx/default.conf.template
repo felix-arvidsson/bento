@@ -13,10 +13,13 @@ server {
         add_header Cache-Control "no-store";
     }
 
-    # Read-only proxy to Syssla; the token is added here and never reaches the browser
-    location = /syssla/api/lists {
-        limit_except GET { deny all; }
-        proxy_pass https://syssla.felixarvidsson.se/api/lists;
+    # Proxy to Syssla; the token is added here and never reaches the browser.
+    # Only lists/tasks/scopes are exposed (no auth, google or friends), and the
+    # X-Bento header forces a CORS preflight so other sites can't call it.
+    location ~ ^/syssla/api/(lists|tasks|scopes)(/|$) {
+        if ($http_x_bento != "1") { return 403; }
+        rewrite ^/syssla(/api/.*)$ $1 break;
+        proxy_pass https://syssla.felixarvidsson.se;
         proxy_ssl_server_name on;
         proxy_set_header Host syssla.felixarvidsson.se;
         proxy_set_header Authorization "Bearer ${SYSSLA_TOKEN}";
@@ -24,14 +27,11 @@ server {
         add_header Cache-Control "no-store";
     }
 
-    location = /syssla/api/tasks {
-        limit_except GET { deny all; }
-        proxy_pass https://syssla.felixarvidsson.se/api/tasks;
+    # Syssla's own free-text parser (due:/prio:/list:/recur:), kept in sync with the server
+    location = /syssla/parser.js {
+        proxy_pass https://syssla.felixarvidsson.se/static/parser.js;
         proxy_ssl_server_name on;
         proxy_set_header Host syssla.felixarvidsson.se;
-        proxy_set_header Authorization "Bearer ${SYSSLA_TOKEN}";
-        proxy_set_header Cookie "";
-        add_header Cache-Control "no-store";
     }
 
     location / {
