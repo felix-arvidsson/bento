@@ -4,6 +4,7 @@
 // fzf-style fuzzy search over every bookmark: the visible lists/buttons plus
 // hidden ones in CONFIG.bookmarks. Press / (or Ctrl+K) to focus.
 
+(() => {
 const searchInput = document.getElementById('search');
 const searchResults = document.getElementById('searchResults');
 const searchCount = document.getElementById('searchCount');
@@ -12,7 +13,7 @@ const searchItems = [
 	...[...CONFIG.firstlistsContainer, ...CONFIG.secondListsContainer].flatMap((l) =>
 		l.links.map((x) => ({ name: x.name, url: x.link, tags: [] }))
 	),
-	...[...CONFIG.firstButtonsContainer, ...CONFIG.secondButtonsContainer].map((b) => ({ name: b.name, url: b.link, tags: [] })),
+	...(CONFIG.bentoLayout === "lists" ? [] : [...CONFIG.firstButtonsContainer, ...CONFIG.secondButtonsContainer]).map((b) => ({ name: b.name, url: b.link, tags: [] })),
 	...(CONFIG.bookmarks || []).map((b) => ({ name: b.name, url: b.url, tags: b.tags || [] })),
 ].filter((item, i, all) => all.findIndex((o) => o.url === item.url) === i);
 
@@ -169,3 +170,4 @@ document.addEventListener('keydown', (e) => {
 		searchInput.focus();
 	}
 });
+})();

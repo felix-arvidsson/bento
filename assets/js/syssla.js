@@ -4,6 +4,7 @@
 // Syssla client: lists, tasks and subtasks, via the nginx proxy at /syssla/api.
 // Free-text input uses Syssla's own parseArgs (syssla/parser.js).
 
+(() => {
 const sysslaBlock = document.getElementById('syssla');
 
 const sy = {
@@ -434,3 +435,4 @@ if (CONFIG.sysslaEnabled) {
 	setInterval(refresh, CONFIG.sysslaRefreshMinutes * 60000);
 	window.addEventListener('focus', refresh);
 }
+})();
