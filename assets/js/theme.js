@@ -7,6 +7,12 @@ let darkTheme = localStorage.getItem('darkTheme');
 const themeToggle = document.querySelector('#themeButton');
 const bodyBackground = document.getElementById('#body');
 
+if (CONFIG.catppuccin) {
+	document.body.classList.add('catppuccin');
+	document.body.dataset.flavor = CONFIG.catppuccinDark;
+	document.body.style.setProperty('--ctp-accent', `var(--ctp-${CONFIG.catppuccinAccent})`);
+}
+
 const enableDark = () => {
 	document.body.classList.add('darktheme');
 	localStorage.setItem('darkTheme', 'enabled');

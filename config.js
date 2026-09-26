@@ -42,6 +42,19 @@ const CONFIG = {
 	calendarRefreshMinutes: 15,
 	calendarLocale: 'sv-SE',
 
+	// Catppuccin colors (https://catppuccin.com/palette/)
+	catppuccin: true, // Light theme = Latte
+	catppuccinDark: 'mocha', // 'frappe', 'macchiato', 'mocha'
+	catppuccinAccent: 'mauve', // rosewater, flamingo, pink, mauve, red, maroon, peach, yellow, green, teal, sky, sapphire, blue, lavender
+
+	// Syssla (proxied by nginx at /syssla/api, token set in .env)
+	sysslaEnabled: true,
+	sysslaUrl: 'https://syssla.felixarvidsson.se',
+	sysslaScope: 'everything', // Scope name/id or 'everything'
+	sysslaLists: [], // List titles to show, in order. Empty = all lists with open tasks
+	sysslaMaxTasks: 6, // Per list
+	sysslaRefreshMinutes: 5,
+
 	// Autochange
 	autoChangeTheme: true,
 

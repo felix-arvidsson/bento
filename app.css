@@ -396,3 +396,98 @@ body {
   color: var(--fg);
   text-align: center;
 }
+
+/* S Y S S L A */
+
+body:has(.sysslaBlock[style*='grid']) {
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
+  padding: 4vh 0;
+}
+
+body:has(.sysslaBlock[style*='grid']) .container {
+  width: min(145vh, 100% - 2rem);
+  height: auto;
+  grid-template-rows: repeat(2, 17vh) repeat(2, 15vh) auto;
+}
+
+.sysslaBlock {
+  display: none;
+  grid-row: 5;
+  grid-column: 1 / span 4;
+  grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+  align-items: start;
+  gap: 1.5rem;
+  padding: 0 0.4rem;
+}
+
+.sysslaList {
+  display: flex;
+  flex-direction: column;
+  padding: 1.2rem 1.4rem;
+  text-decoration: none;
+  color: var(--fg);
+}
+
+.sysslaHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.8rem;
+  font-weight: bold;
+  font-size: calc(var(--fg-list) * 1.1);
+  margin-bottom: 0.8rem;
+}
+
+.sysslaCount {
+  font-size: var(--fg-list);
+  color: var(--accent);
+}
+
+.sysslaList ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sysslaTask {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-size: calc(var(--fg-list) * 0.85);
+}
+
+.sysslaTitle {
+  flex: 1;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.sysslaPrio {
+  flex: 0 0 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--muted, #9ca0b0);
+  opacity: 0.4;
+}
+.sysslaPrio.prio1 { background: var(--ctp-blue, #57a0d9); opacity: 1; }
+.sysslaPrio.prio2 { background: var(--ctp-peach, #e8a33d); opacity: 1; }
+.sysslaPrio.prio3 { background: var(--ctp-red, #d9534f); opacity: 1; }
+
+.sysslaDue {
+  font-size: 0.85em;
+  color: var(--muted, var(--fg));
+  white-space: nowrap;
+}
+.sysslaDue.today { color: var(--accent); font-weight: bold; }
+.sysslaDue.overdue { color: var(--ctp-red, #d9534f); font-weight: bold; }
+
+.sysslaMore,
+.sysslaEmpty {
+  font-size: calc(var(--fg-list) * 0.8);
+  color: var(--muted, var(--fg));
+}

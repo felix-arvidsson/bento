@@ -13,6 +13,27 @@ server {
         add_header Cache-Control "no-store";
     }
 
+    # Read-only proxy to Syssla; the token is added here and never reaches the browser
+    location = /syssla/api/lists {
+        limit_except GET { deny all; }
+        proxy_pass https://syssla.felixarvidsson.se/api/lists;
+        proxy_ssl_server_name on;
+        proxy_set_header Host syssla.felixarvidsson.se;
+        proxy_set_header Authorization "Bearer ${SYSSLA_TOKEN}";
+        proxy_set_header Cookie "";
+        add_header Cache-Control "no-store";
+    }
+
+    location = /syssla/api/tasks {
+        limit_except GET { deny all; }
+        proxy_pass https://syssla.felixarvidsson.se/api/tasks;
+        proxy_ssl_server_name on;
+        proxy_set_header Host syssla.felixarvidsson.se;
+        proxy_set_header Authorization "Bearer ${SYSSLA_TOKEN}";
+        proxy_set_header Cookie "";
+        add_header Cache-Control "no-store";
+    }
+
     location / {
         try_files $uri $uri/ =404;
     }
