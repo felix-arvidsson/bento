@@ -3,68 +3,32 @@
 // ┴─┘┴└─┘ ┴ └─┘
 // Functions for printing both lists
 
-const generateFirstListsContainer = () => {
-	for (const list of CONFIG.firstlistsContainer) {
-		let item = `
+const renderList = (list, container) => {
+	const target = CONFIG.openInNewTab ? '_blank' : '';
+	const links = list.links
+		.map(
+			(l) => `
+          <a
+          target="${target}"
+          href="${l.link}"
+          class="listItem"
+          >${l.name}</a>`
+		)
+		.join('');
+	const item = `
         <div class="card list list__${list.id}" id="list_${list.id}">
-          <i class="listIcon" icon-name="${list.icon}"></i>
-          <a
-          target="${CONFIG.openInNewTab ? '_blank' : ''}"
-          href="${list.links[0].link}"
-          class="listItem"
-          >${list.links[0].name}</a>
-          <a
-          target="${CONFIG.openInNewTab ? '_blank' : ''}"
-          href="${list.links[1].link}"
-          class="listItem"
-          >${list.links[1].name}</a>
-          <a
-          target="${CONFIG.openInNewTab ? '_blank' : ''}"
-          href="${list.links[2].link}"
-          class="listItem"
-          >${list.links[2].name}</a>
-          <a
-          target="${CONFIG.openInNewTab ? '_blank' : ''}"
-          href="${list.links[3].link}"
-          class="listItem"
-          >${list.links[3].name}</a>
+          <i class="listIcon" data-lucide="${list.icon}"></i>${links}
         </div>
       `;
-		const position = 'beforeend';
-		lists_1.insertAdjacentHTML(position, item);
-	}
+	container.insertAdjacentHTML('beforeend', item);
+};
+
+const generateFirstListsContainer = () => {
+	for (const list of CONFIG.firstlistsContainer) renderList(list, lists_1);
 };
 
 const generateSecondListsContainer = () => {
-	for (const list of CONFIG.secondListsContainer) {
-		let item = `
-        <div class="card list list__${list.id}" id="list_${list.id}">
-        <i class="listIcon" icon-name="${list.icon}"></i>
-        <a
-        target="${CONFIG.openInNewTab ? '_blank' : ''}"
-        href="${list.links[0].link}"
-        class="listItem"
-        >${list.links[0].name}</a>
-        <a
-        target="${CONFIG.openInNewTab ? '_blank' : ''}"
-        href="${list.links[1].link}"
-        class="listItem"
-        >${list.links[1].name}</a>
-        <a
-        target="${CONFIG.openInNewTab ? '_blank' : ''}"
-        href="${list.links[2].link}"
-        class="listItem"
-        >${list.links[2].name}</a>
-        <a
-        target="${CONFIG.openInNewTab ? '_blank' : ''}"
-        href="${list.links[3].link}"
-        class="listItem"
-        >${list.links[3].name}</a>
-        </div>
-      `;
-		const position = 'beforeend';
-		lists_2.insertAdjacentHTML(position, item);
-	}
+	for (const list of CONFIG.secondListsContainer) renderList(list, lists_2);
 };
 
 const generateLists = () => {

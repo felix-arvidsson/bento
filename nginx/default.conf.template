@@ -1,0 +1,19 @@
+server {
+    listen 80;
+    root /usr/share/nginx/html;
+    index index.html;
+
+    # Proxy the secret Google Calendar iCal feed so the URL never reaches the browser
+    location = /calendar.ics {
+        proxy_pass ${CALENDAR_ICS_URL};
+        proxy_ssl_server_name on;
+        proxy_set_header Host calendar.google.com;
+        proxy_buffer_size 32k;
+        proxy_buffers 8 32k;
+        add_header Cache-Control "no-store";
+    }
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}

@@ -11,7 +11,7 @@ const CONFIG = {
 	// └─┘┴ ┴└─┘┴└─┘└─┘
 
 	// General
-	name: 'John',
+	name: 'Flip',
 	imageBackground: false,
 	openInNewTab: true,
 	twelveHourFormat: false,
@@ -23,7 +23,7 @@ const CONFIG = {
 	greetingNight: 'Go to Sleep!',
 
 	// Layout
-	bentoLayout: 'bento', // 'bento', 'lists', 'buttons'
+	bentoLayout: 'lists', // 'bento', 'lists', 'buttons'
 
 	// Weather
 	weatherKey: 'InsertYourAPIKeyHere123456', // Write here your API Key
@@ -34,6 +34,13 @@ const CONFIG = {
 	trackLocation: true, // If false or an error occurs, the app will use the lat/lon below
 	defaultLatitude: '37.775',
 	defaultLongitude: '-122.419',
+
+	// Calendar (feed proxied by nginx at /calendar.ics, URL set in .env)
+	calendarEnabled: true, // Replaces the weather widget
+	calendarDays: 14, // How far ahead to look
+	calendarMaxEvents: 5,
+	calendarRefreshMinutes: 15,
+	calendarLocale: 'sv-SE',
 
 	// Autochange
 	autoChangeTheme: true,
@@ -135,46 +142,46 @@ const CONFIG = {
 	// First Links Container
 	firstlistsContainer: [
 		{
-			icon: 'music',
+			icon: 'clapperboard',
 			id: '1',
 			links: [
 				{
-					name: 'Inspirational',
-					link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+					name: 'Jellyfin',
+					link: 'https://jellyfin.media.wtf',
 				},
 				{
-					name: 'Classic',
-					link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+					name: 'Seerr',
+					link: 'https://seerr.media.wtf',
 				},
 				{
-					name: 'Oldies',
-					link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+					name: 'Musik',
+					link: 'https://musik.media.wtf',
 				},
 				{
-					name: 'Rock',
-					link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+					name: 'Calibre',
+					link: 'https://calibre.media.wtf',
 				},
 			],
 		},
 		{
-			icon: 'coffee',
+			icon: 'radar',
 			id: '2',
 			links: [
 				{
-					name: 'Linkedin',
-					link: 'https://www.linkedin.com',
+					name: 'Sonarr',
+					link: 'https://sonarr.media.wtf',
 				},
 				{
-					name: 'Dribbble',
-					link: 'https://www.dribbble.com',
+					name: 'Radarr',
+					link: 'https://radarr.media.wtf',
 				},
 				{
-					name: 'Trello',
-					link: 'https://www.trello.com',
+					name: 'Lidarr',
+					link: 'https://lidarr.media.wtf',
 				},
 				{
-					name: 'Slack',
-					link: 'https://www.slack.com',
+					name: 'Prowlarr',
+					link: 'https://prowlarr.media.wtf',
 				},
 			],
 		},
@@ -183,46 +190,42 @@ const CONFIG = {
 	// Second Links Container
 	secondListsContainer: [
 		{
-			icon: 'binary',
+			icon: 'download',
 			id: '1',
 			links: [
 				{
-					name: 'Spotify',
-					link: 'https://www.spotify.com',
+					name: 'Torrent',
+					link: 'https://torrent.media.wtf',
 				},
 				{
-					name: 'Reddit',
-					link: 'https://www.reddit.com',
+					name: 'Deluge',
+					link: 'https://deluge.media.wtf',
 				},
 				{
-					name: 'Hashnode',
-					link: 'https://www.hashnode.com',
-				},
-				{
-					name: 'Pocket',
-					link: 'https://www.pocket.com',
+					name: 'Jackett',
+					link: 'https://jackett.media.wtf',
 				},
 			],
 		},
 		{
-			icon: 'github',
+			icon: 'server',
 			id: '2',
 			links: [
 				{
-					name: 'Front',
-					link: 'https://www.reddit.com/r/Frontend/',
+					name: 'Proxmox',
+					link: 'https://proxmox.fubar.wtf',
 				},
 				{
-					name: 'Rust',
-					link: 'https://www.reddit.com/r/rust/',
+					name: 'Pi-hole',
+					link: 'https://pihole.infra.wtf/admin',
 				},
 				{
-					name: 'Go',
-					link: 'https://www.reddit.com/r/golang/',
+					name: 'Uptime',
+					link: 'https://uptime.infra.wtf',
 				},
 				{
-					name: 'Repos',
-					link: 'https://github.com/migueravila',
+					name: 'Stronko',
+					link: 'https://stronko.fubar.wtf',
 				},
 			],
 		},

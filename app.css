@@ -361,3 +361,38 @@ body {
     padding-right: 100px;
   }
 }
+
+/* C A L E N D A R */
+
+.calendar {
+  display: none;
+  flex-direction: column;
+  gap: 0.6vh;
+  margin-top: 2vh;
+  width: 80%;
+}
+
+.calendarEvent {
+  display: flex;
+  gap: 1.5vh;
+  font-size: var(--fg-list);
+  color: var(--fg);
+  white-space: nowrap;
+}
+
+.calendarWhen {
+  flex: 0 0 11em;
+  font-weight: bold;
+  color: var(--accent);
+}
+
+.calendarTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.calendarEmpty {
+  font-size: var(--fg-list);
+  color: var(--fg);
+  text-align: center;
+}
