@@ -29,6 +29,13 @@ server {
         proxy_set_header Host syssla.felixarvidsson.se;
     }
 
+    # Always revalidate the app itself so a rebuild is picked up on reload;
+    # without this Chrome heuristically serves stale JS after deploys.
+    location ~* \.(html|js|css)$ {
+        add_header Cache-Control "no-cache";
+        try_files $uri =404;
+    }
+
     location / {
         try_files $uri $uri/ =404;
     }
