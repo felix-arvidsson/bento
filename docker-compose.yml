@@ -6,7 +6,7 @@ services:
     env_file: .env
     environment:
       # Only substitute our own variables so nginx's $uri etc. are left alone
-      NGINX_ENVSUBST_FILTER: "^(CALENDAR_ICS_URL|SYSSLA_TOKEN)$$"
+      NGINX_ENVSUBST_FILTER: "^(CALENDAR_ICS_URLS|SYSSLA_TOKEN)$$"
     volumes:
       - ./nginx/default.conf.template:/etc/nginx/templates/default.conf.template:ro
     ports:

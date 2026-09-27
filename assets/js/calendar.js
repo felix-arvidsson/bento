@@ -21,7 +21,10 @@ const formatTime = (date) =>
 
 const collectEvents = (ics) => {
 	const vcal = new ICAL.Component(ICAL.parse(ics));
-	for (const tz of vcal.getAllSubcomponents('vtimezone')) ICAL.TimezoneService.register(tz);
+	// Multiple feeds can ship the same timezone definition; re-registering is fine
+	for (const tz of vcal.getAllSubcomponents('vtimezone')) {
+		try { ICAL.TimezoneService.register(tz); } catch { /* already registered */ }
+	}
 
 	const now = new Date();
 	const until = new Date(now.getTime() + CONFIG.calendarDays * 86400000);
@@ -78,12 +81,38 @@ const renderCalendar = (events) => {
 };
 
 const loadCalendar = async () => {
-	try {
-		const res = await fetch('calendar.ics', { cache: 'no-store' });
-		if (!res.ok) throw new Error(`HTTP ${res.status}`);
-		renderCalendar(collectEvents(await res.text()));
-	} catch (err) {
-		console.error('Calendar:', err);
+	const results = await Promise.allSettled(
+		CONFIG.calendarFeeds.map(async (path) => {
+			const res = await fetch(path, { cache: 'no-store' });
+			if (!res.ok) throw new Error(`${path}: HTTP ${res.status}`);
+			return collectEvents(await res.text());
+		})
+	);
+
+	const events = [];
+	for (const r of results) if (r.status === 'fulfilled') events.push(...r.value);
+
+	// The same event can arrive via several feeds (invites copied into the
+	// primary calendar, calendars shared between accounts), so de-dup on
+	// start time + title rather than UID.
+	const seen = new Set();
+	const unique = events
+		.filter((e) => {
+			const key = `${e.start.getTime()}|${e.allDay}|${e.title}`;
+			if (seen.has(key)) return false;
+			seen.add(key);
+			return true;
+		})
+		.sort((a, b) => a.start - b.start || b.allDay - a.allDay)
+		.slice(0, CONFIG.calendarMaxEvents);
+
+	if (unique.length) {
+		renderCalendar(unique);
+	} else if (events.length) {
+		calendarBlock.innerHTML = '<p class="calendarEmpty">Inget inplanerat</p>';
+	} else {
+		const failed = results.filter((r) => r.status === 'rejected').map((r) => r.reason?.message || r.reason);
+		console.error('Calendar:', failed);
 		calendarBlock.innerHTML = '<p class="calendarEmpty">Kunde inte hämta kalendern</p>';
 	}
 };

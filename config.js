@@ -35,8 +35,9 @@ const CONFIG = {
 	defaultLatitude: '37.775',
 	defaultLongitude: '-122.419',
 
-	// Calendar (feed proxied by nginx at /calendar.ics, URL set in .env)
+	// Calendar (feeds proxied by nginx at /calendar-N.ics, URLs set in .env)
 	calendarEnabled: true, // Replaces the weather widget
+	calendarFeeds: ['calendar-1.ics', 'calendar-2.ics'], // One path per URL in CALENDAR_ICS_URLS, add calendar-3.ics … as needed
 	calendarDays: 14, // How far ahead to look
 	calendarMaxEvents: 5,
 	calendarRefreshMinutes: 15,

@@ -3,15 +3,10 @@ server {
     root /usr/share/nginx/html;
     index index.html;
 
-    # Proxy the secret Google Calendar iCal feed so the URL never reaches the browser
-    location = /calendar.ics {
-        proxy_pass ${CALENDAR_ICS_URL};
-        proxy_ssl_server_name on;
-        proxy_set_header Host calendar.google.com;
-        proxy_buffer_size 32k;
-        proxy_buffers 8 32k;
-        add_header Cache-Control "no-store";
-    }
+    # Proxy the secret Google Calendar iCal feeds so the URLs never reach the
+    # browser. One /calendar-N.ics location per URL is generated at container
+    # start from CALENDAR_ICS_URLS by nginx/30-feeds.sh.
+    include /etc/nginx/feeds.conf;
 
     # Proxy to Syssla; the token is added here and never reaches the browser.
     # Only lists/tasks/scopes are exposed (no auth, google or friends), and the

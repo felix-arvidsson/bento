@@ -3,4 +3,4 @@
 .gitignore
 .dockerignore
 docker-compose.yml
-nginx
+nginx/default.conf.template
