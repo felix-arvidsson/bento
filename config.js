@@ -192,6 +192,10 @@ const CONFIG = {
 					link: 'https://musik.media.wtf',
 				},
 				{
+					name: 'Music Assistant',
+					link: 'https://ma.home.wtf',
+				},
+				{
 					name: 'Calibre',
 					link: 'https://calibre.media.wtf',
 				},
@@ -248,6 +252,10 @@ const CONFIG = {
 				{
 					name: 'Proxmox',
 					link: 'https://proxmox.fubar.wtf',
+				},
+				{
+					name: 'Home Assistant',
+					link: 'https://homeassistant.felixarvidsson.se',
 				},
 				{
 					name: 'Pi-hole',
