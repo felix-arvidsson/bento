@@ -339,10 +339,6 @@ body {
     grid-column: 1 / span 4;
   }
 
-  .weatherBlock {
-    display: none;
-  }
-
   #greetings {
     font-size: var(--fg-secondary);
   }
@@ -436,6 +432,26 @@ body {
 .sysslaBlock {
   grid-row: 6;
   grid-column: 1 / span 4;
+}
+
+/* Narrow screens: keep the calendar visible, stacked under the clock */
+@media only screen and (max-width: 68.75em) {
+  .weatherBlock {
+    grid-row: 3;
+    grid-column: 1 / span 4;
+  }
+
+  .searchBlock {
+    grid-row: 4;
+  }
+
+  .linksBlock {
+    grid-row: 5 / span 2;
+  }
+
+  .sysslaBlock {
+    grid-row: 7;
+  }
 }
 
 /* Date sits just above the calendar, so keep it close to that text size */
