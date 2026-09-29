@@ -26,6 +26,8 @@ function displayClock() {
 
 	document.getElementById('month').innerText = mm;
 	document.getElementById('day').innerText = dd;
+	const wd = d.toLocaleDateString(CONFIG.calendarLocale, { weekday: 'long' });
+	document.getElementById('weekday').innerText = wd.charAt(0).toUpperCase() + wd.slice(1);
 
 	setTimeout(displayClock, 1000);
 }
