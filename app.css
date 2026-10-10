@@ -12,7 +12,6 @@
   /* Font Size */
   --fg-primary: 12vh; /* Time and Greetings */
   --fg-secondary: 3vh; /* Greetings and Weather widger */
-  --fg-date: 8vh; /* Date */
   --fg-list: 2vh; /* Links List */
   --icon: 3vh; /* Icon Size */
 
@@ -140,7 +139,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 30px;
+  margin: 0.5rem 0 0.75rem;
 }
 
 .weather {
@@ -165,13 +164,14 @@ body {
 
 #month,
 #day {
-  font-size: var(--fg-date);
+  font-size: calc(var(--fg-secondary) * 1.6);
   font-weight: bold;
   color: var(--fg);
 }
 
 #day {
-  margin-left: 1.5rem;
+  margin-left: 0.6rem;
+  color: var(--accent);
 }
 
 #weekday {
@@ -458,21 +458,6 @@ body {
   .sysslaBlock {
     grid-row: 7;
   }
-}
-
-/* Date sits just above the calendar, so keep it close to that text size */
-.date {
-  margin-top: 0;
-}
-
-#month,
-#day {
-  font-size: calc(var(--fg-secondary) * 1.6);
-}
-
-#day {
-  margin-left: 0.6rem;
-  color: var(--accent);
 }
 
 /* S E A R C H  (fzf-style) */
