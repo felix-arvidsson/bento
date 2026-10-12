@@ -229,7 +229,9 @@ const restoreDrafts = (drafts) => {
 
 const render = () => {
 	const drafts = captureDrafts();
-	const lists = visibleLists();
+	// Empty lists (no open tasks) last; stable sort keeps the configured order otherwise
+	const hasOpen = (l) => sy.tasks.some((t) => t.list_id === l.id && !t.parent_id);
+	const lists = [...visibleLists()].sort((a, b) => hasOpen(b) - hasOpen(a));
 	const scopes = [{ id: 'everything', name: 'everything', label: 'Allt' }, ...sy.scopes];
 	sysslaBlock.innerHTML = `
     <div class="sysslaBar">
